@@ -1,0 +1,25 @@
+name: 'gha-aws-webidentity-token'
+description: 'Setup webidentity token to allow workflows to access AWS'
+inputs:
+  aws-role-arn:
+    description: 'AWS Role that will be assumed via github OIDC'
+    required: true
+  aws-default-region:
+    description: 'AWS default region'
+    required: false
+    default: 'eu-central-1'
+  aws-token-file:
+    description: 'Path to AWS web identity token file'
+    required: false
+    default: '/tmp/awscreds'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure OIDC web identity token file for AWS
+      env:
+        AWS_ROLE_ARN: ${{ inputs.aws-role-arn}}
+        AWS_WEB_IDENTITY_TOKEN_FILE: ${{ inputs.aws-token-file}}
+        AWS_DEFAULT_REGION: ${{ inputs.aws-default-region}}
+      run: ${{ github.action_path }}/scripts/setup_token.sh
+      shell: bash
