@@ -12,6 +12,10 @@ inputs:
     description: 'Path to AWS web identity token file'
     required: false
     default: '/tmp/awscreds'
+  debug:
+    description: 'Enable debug mode'
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
@@ -21,5 +25,6 @@ runs:
         AWS_ROLE_ARN: ${{ inputs.aws-role-arn}}
         AWS_WEB_IDENTITY_TOKEN_FILE: ${{ inputs.aws-token-file}}
         AWS_DEFAULT_REGION: ${{ inputs.aws-default-region}}
+        DEBUG: ${{ inputs.debug }}
       run: ${{ github.action_path }}/scripts/setup_token.sh
       shell: bash
