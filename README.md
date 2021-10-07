@@ -18,6 +18,11 @@ This action configures the yet undocumented feature to use a web identity token 
 **Optional** Path to AWS web identity token file
 **Default:** `/tmp/awscreds`
 
+### `debug`
+
+**Optional** Set to enable debug output
+**Default:** ``
+
 ## Example usage
 ```
 uses: sueddeutsche/gha-aws-webidentity-token@v1
