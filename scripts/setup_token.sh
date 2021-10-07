@@ -26,5 +26,3 @@ set_github_env_value AWS_DEFAULT_REGION "${AWS_DEFAULT_REGION}"
 [ -n "${DEBUG:-""}" ] && export CURL_DEBUG="-vv"
 curl ${CURL_DEBUG:-} -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}" \
   | jq -r '.value' > "${AWS_WEB_IDENTITY_TOKEN_FILE}"
-
-[ -n "${DEBUG:-""}" ] && cat "${AWS_WEB_IDENTITY_TOKEN_FILE}"
